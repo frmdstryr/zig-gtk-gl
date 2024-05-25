@@ -1,0 +1,5 @@
+zig-out/
+zig-cache/
+*.kate-swp
+*.kdev4
+.kdev4/
