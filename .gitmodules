@@ -1,0 +1,6 @@
+[submodule "deps/zgl"]
+	path = deps/zgl
+	url = https://github.com/ziglibs/zgl.git
+[submodule "deps/zig-gtk"]
+	path = deps/zig-gtk
+	url = https://github.com/frmdstryr/zig-gtk.git

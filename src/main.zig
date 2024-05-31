@@ -61,7 +61,6 @@ const App = struct {
 
         const program = gl.Program.create();
         self.program = program;
-        //defer program.delete();
         program.attach(vertex_shader);
         program.attach(fragment_shader);
         program.link();
@@ -74,9 +73,6 @@ const App = struct {
             1.0,    1.0, 0.0, 1.0,
             1.0,    1.0, 1.0, 1.0,
         };
-//         const indices = [_]u32{ // note that we start from 0!
-//             0, 1, 3, // first Triangle
-//             1, 2, 3, // second Triangle
 //         };
         self.vertex_array = gl.VertexArray.create();
 
@@ -87,16 +83,10 @@ const App = struct {
             vertex_buffer.bind(.array_buffer);
             vertex_buffer.data(f32, &vertices, .static_draw);
 
-//             var index_buffer = gl.Buffer.create();
-//             defer index_buffer.delete();
-//             index_buffer.bind(.element_array_buffer);
-//             index_buffer.data(u32, &indices, .static_draw);
-
             gl.enableVertexAttribArray(0);
             gl.vertexAttribPointer(0, 4, .float, false, 4*@sizeOf(f32), 0);
             gl.enableVertexAttribArray(1);
             gl.vertexAttribPointer(1, 4, .float, false, 4*@sizeOf(f32), 48);
-            // vertex_array.attribFormat(0, 3, .float, false, 0);
             gl.bindVertexArray(.invalid);
         }
     }
@@ -134,8 +124,6 @@ const App = struct {
         );
         if (self.vertex_array) |vertex_array| {
             vertex_array.bind();
-            //self.vertex_array.?.enableVertexAttribute(0);
-            //gl.drawElements(.triangles, 6, .unsigned_int, 0);
             gl.drawArrays(.triangles, 0, 3);
         }
         return true;
@@ -146,7 +134,7 @@ const App = struct {
         const self: *Self = @ptrCast(@alignCast(user_data.?));
         _= frame_clock;
         _ = self;
-        area.queueDraw();
+        area.queueRender();
         return true;
     }
 
